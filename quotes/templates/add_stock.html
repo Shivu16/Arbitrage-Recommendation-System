@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>add_stock</title>
+</head>
+<body>
+	<br>
+	<form action="{% url 'add_stock' %}" class="form-inline my-2 my-lg-0" method="POST">
+		{% csrf_token %}
+		<input class="form-control mr-sm-2" type="search" placeholder="Add Stock" aria-label="Search Stock" name="ticker">      
+		<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" >Add Stock</button>&nbsp;&nbsp;&nbsp;
+	</form>
+	<br>
+
+	{% if ticker %}
+	{% if ticker == "Error" %}
+
+	There was a problem with your ticker symbol. Please try typing again.
+
+	{% else %}
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Name of Stock</th>
+				<th scope="col">NSE BID</th>
+				<th scope="col">BSE BID</th>
+				<th scope="col">NSE ASK</th>
+				<th scope="col">BSE ASK</th>
+				<th scope="col">Price Difference</th>
+				<th scope="col">Final Profit</th>
+				<th scope="col"></th>
+
+				
+			</tr>
+		</thead>
+		<tbody>
+
+			{% for key,value in ticker.items %}
+			<tr>
+
+				{% if value.colors == "nse" %}
+				<th scope="row">{{ key }}</th>
+				<td>{{ value.Name }}</td>
+				<td >{{ value.NSE_BID }}</td>
+				<td bgcolor="#F0561C">{{  value.BSE_BID }}</td>
+				<td bgcolor="#5BAC4C">{{ value.NSE_ASK }}</td> 
+				<td>{{ value.BSE_ASK }}</td>
+				<td>{{ value.Diff }}</td>
+				<td>{{ value.Arbitrage }}</td>
+				<td>
+					<form action="{% url 'delete_stock' value.og_str %}" method="post">
+						{% csrf_token %}
+
+						<div class="d-flex justify-content-center mt-3 login_container">
+							<input class="btn login_btn" type="submit" value="Delete">
+						</div>
+					</form>
+				</td>
+				
+				{% endif %}
+
+				{% if value.colors == "bse" %}
+				<th scope="row">{{ key }}</th>
+				<td>{{ value.Name }}</td>
+				<td td bgcolor="#F0561C">{{ value.NSE_BID }}</td>
+				<td>{{ value.BSE_BID }}</td>
+				<td>{{ value.NSE_ASK }}</td>
+				<td td bgcolor="#5BAC4C">{{ value.BSE_ASK }}</td>
+				<td>{{ value.Diff }}</td>
+				<td>{{ value.Arbitrage }}</td>
+				<td>
+					<form action="{% url 'delete_stock' value.og_str %}" method="post">
+						{% csrf_token %}
+						<div class="d-flex justify-content-center mt-3 login_container">
+							<input class="btn login_btn" type="submit" value="Delete">
+						</div>
+					</form></td>
+					
+					
+					{% endif %}
+
+					{% if value.colors == 0 %}
+					<th scope="row">{{ key }}</th>
+					<td>{{ value.Name }}</td>
+					<td>{{ value.NSE_BID }}</td>
+					<td>{{ value.BSE_BID }}</td>
+					<td>{{ value.NSE_ASK }}</td>
+					<td >{{ value.BSE_ASK }}</td>
+					<td>{{ value.Diff }}</td>
+					<td>{{ value.Arbitrage }}</td>
+					<td>
+						<form action="{% url 'delete_stock' value.og_str %}" method="post">
+							{% csrf_token %}
+							<div class="d-flex justify-content-center mt-3 login_container">
+								<input class="btn login_btn" type="submit" value="Delete">
+							</div>
+						</form></td>
+						{% endif %}
+
+					</tr>
+
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+
+			{% endif %}
+			{% else %}
+
+			<H1>Check your ticker symbol</H1>
+
+			{% endif %}
+
+
+			
+			
+		</body>
+		</html>
+
+
+		{% endblock %}

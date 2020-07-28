@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if ticker %}
+{% if ticker == "Error" %}
+
+There was a problem with your ticker symbol. Please try typing again.
+
+{% else %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Name of Stock</th>
+			<th scope="col">NSE BID</th>
+			<th scope="col">BSE BID</th>
+			<th scope="col">NSE ASK</th>
+			<th scope="col">BSE ASK</th>
+			<th scope="col">Price Difference</th>
+			<th scope="col">Final Profit</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		{% for key,value in ticker.items %}
+		<tr>
+
+			{% if value.colors == "nse" %}
+			<th scope="row">{{ key }}</th>
+			<td>{{ value.Name }}</td>
+			<td >{{ value.NSE_BID }}</td>
+				<td bgcolor="#F0561C">{{  value.BSE_BID }}</td>
+				<td bgcolor="#5BAC4C">{{ value.NSE_ASK }}</td>
+			<td>{{ value.BSE_ASK }}</td>
+			<td>{{ value.Diff }}</td>
+			<td>{{ value.Arbitrage }}</td>
+			{% endif %}
+
+			{% if value.colors == "bse" %}
+			<th scope="row">{{ key }}</th>
+			<td>{{ value.Name }}</td>
+			<td td bgcolor="#F0561C">{{ value.NSE_BID }}</td>
+				<td>{{ value.BSE_BID }}</td>
+				<td>{{ value.NSE_ASK }}</td>
+				<td td bgcolor="#5BAC4C">{{ value.BSE_ASK }}</td>
+			<td>{{ value.Diff }}</td>
+			<td>{{ value.Arbitrage }}</td>
+			{% endif %}
+
+			{% if value.colors == 0 %}
+			<th scope="row">{{ key }}</th>
+			<td>{{ value.Name }}</td>
+			<td>{{ value.NSE_BID }}</td>
+			<td>{{ value.BSE_BID }}</td>
+			<td>{{ value.NSE_ASK }}</td>
+			<td >{{ value.BSE_ASK }}</td>
+			<td>{{ value.Diff }}</td>
+			<td>{{ value.Arbitrage }}</td>
+			{% endif %}
+
+
+
+		</tr>
+
+		{% endfor %}
+	</tbody>
+</table>
+
+
+
+{% endif %}
+{% else %}
+
+<H1>Check your ticker symbol</H1>
+
+{% endif %}
+
+{% endblock %}
