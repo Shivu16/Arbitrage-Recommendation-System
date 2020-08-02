@@ -18,8 +18,8 @@
       margin-right: 20px;
     }
   </style>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'home' %}">Arbitrage Recommender</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark"  >
+    <a class="navbar-brand" href="{% url 'home' %}" >Arbitrage Recommender</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,26 +27,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'about' %}">About</a>
+          <a class="nav-link" href="{% url 'about' %}" >About</a>
         </li>
 
       </ul>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'add_stock' %}">Preferences</a>
+            <a class="nav-link" href="{% url 'add_stock' %}" >Preferences</a>
           </li>          
         </ul>
 
         <form action="{% url 'search_stock' %}" class="form-inline my-2 my-lg-0" method="POST">
           {% csrf_token %}
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="ticker">      
-          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" >Search</button>&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="color: #ffffff" >Search</button>&nbsp;&nbsp;&nbsp;
         </form>
       </div>
 
-      <span class="hello-msg">  Hello, {{request.user}}</span>
-      <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+      <span class="hello-msg" >  Hello, {{request.user}}</span>
+      <span><a class="hello-msg" href="{% url 'logout' %}" >Logout</a></span>
 
     </nav>
   </body>

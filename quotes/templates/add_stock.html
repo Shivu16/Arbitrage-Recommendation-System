@@ -22,8 +22,8 @@
 	There was a problem with your ticker symbol. Please try typing again.
 
 	{% else %}
-	<table class="table table-bordered">
-		<thead>
+	<table class="table table-bordered table-active">
+		<thead class="thead-dark">
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">Name of Stock</th>
@@ -33,7 +33,7 @@
 				<th scope="col">BSE ASK</th>
 				<th scope="col">Price Difference</th>
 				<th scope="col">Final Profit</th>
-				<th scope="col"></th>
+				<th scope="col">Delete Stock</th>
 
 				
 			</tr>
@@ -113,7 +113,7 @@
 			{% endif %}
 			{% else %}
 
-			<H1>Check your ticker symbol</H1>
+			<H5>Enter a valid ticker symbol</H5>
 
 			{% endif %}
 
